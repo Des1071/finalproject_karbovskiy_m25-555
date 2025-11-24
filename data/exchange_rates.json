@@ -1,0 +1,54 @@
+[
+  {
+    "timestamp": "2025-11-17T21:51:04.432213",
+    "source": "coingecko",
+    "base_currency": "USD",
+    "rates": {
+      "BTC_USD": 92835,
+      "ETH_USD": 3043.93,
+      "SOL_USD": 131.21,
+      "ADA_USD": 0.469347,
+      "DOT_USD": 2.71
+    },
+    "total_pairs": 5
+  },
+  {
+    "timestamp": "2025-11-21T22:21:32.574573",
+    "source": "coingecko",
+    "base_currency": "USD",
+    "rates": {
+      "BTC_USD": 84721,
+      "ETH_USD": 2771.82,
+      "SOL_USD": 129.04,
+      "ADA_USD": 0.411656,
+      "DOT_USD": 2.39
+    },
+    "total_pairs": 5
+  },
+  {
+    "timestamp": "2025-11-21T22:43:04.726804",
+    "source": "exchangerate",
+    "base_currency": "USD",
+    "rates": {
+      "EUR_USD": 0.8672,
+      "GBP_USD": 0.7646,
+      "RUB_USD": 80.3203,
+      "JPY_USD": 157.4088,
+      "CNY_USD": 7.1176
+    },
+    "total_pairs": 5
+  },
+  {
+    "timestamp": "2025-11-21T22:43:15.405778",
+    "source": "coingecko",
+    "base_currency": "USD",
+    "rates": {
+      "BTC_USD": 84611,
+      "ETH_USD": 2765.5,
+      "SOL_USD": 128.77,
+      "ADA_USD": 0.411331,
+      "DOT_USD": 2.39
+    },
+    "total_pairs": 5
+  }
+]

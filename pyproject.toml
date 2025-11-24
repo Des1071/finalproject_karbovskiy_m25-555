@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "finalproject-karbovskiy-denis-m25-555"
+version = "0.1.0"
+description = ""
+authors = ["Denis39rus <carbovskydenis@yandex.ru>"]
+readme = "README.md"
+packages = [
+    { include = "valutatrade_hub", from = "." },
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+prompt = "^0.4.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.14.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+project = "main:main"
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+exclude = ["venv", ".venv", "dist", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []

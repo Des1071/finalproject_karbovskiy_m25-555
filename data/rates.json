@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-11-21T22:43:15.405778",
+  "source": "coingecko",
+  "base_currency": "USD",
+  "rates": {
+    "BTC_USD": 84611,
+    "ETH_USD": 2765.5,
+    "SOL_USD": 128.77,
+    "ADA_USD": 0.411331,
+    "DOT_USD": 2.39
+  },
+  "total_pairs": 5
+}
