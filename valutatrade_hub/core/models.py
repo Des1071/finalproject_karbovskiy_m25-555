@@ -46,7 +46,8 @@ class User:
                 f'Username: {self._username}, '
                 f'Registered: {self._registration_date.strftime('%Y-%m-%d %H:%M')}')
     
-    # Геттеры - необходимы для безопасного доступа к атрибутам, нельзя изменить напрямую данные
+# Геттеры - необходимы для безопасного доступа к атрибутам,
+# нельзя изменить напрямую данные
     @property
     def user_id(self) -> int:
         return self._user_id

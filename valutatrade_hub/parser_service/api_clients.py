@@ -47,7 +47,8 @@ class BaseApiClient:
                 )
                 
                 if response.status_code != 200:
-                    raise ApiRequestError(f'HTTP {response.status_code}: {response.text}')
+                    raise ApiRequestError(f'HTTP \
+                        {response.status_code}: {response.text}')
                 
                 data = response.json()
                 return data
@@ -55,7 +56,8 @@ class BaseApiClient:
             except requests.exceptions.RequestException as e:
                 last_error = e
                 if attempt == self.config.REQUEST_RETRIES - 1:
-                    raise ApiRequestError(f'Не удалось выполнить запрос после {self.config.REQUEST_RETRIES} попыток: {last_error}')
+                    raise ApiRequestError(f'Не удалось выполнить запрос после \
+                        {self.config.REQUEST_RETRIES} попыток: {last_error}')
                 
                 time.sleep(self.config.RETRY_DELAY * (attempt + 1))
         
@@ -78,7 +80,8 @@ class CoinGeckoClient(BaseApiClient):
             
             rates = {}
             for crypto_code, gecko_id in self.config.CRYPTO_ID_MAP.items():
-                if gecko_id in data and self.config.BASE_CURRENCY.lower() in data[gecko_id]:
+                if gecko_id in data and self.config.BASE_CURRENCY.lower() \
+                    in data[gecko_id]:
                     pair_key = f"{crypto_code}_{self.config.BASE_CURRENCY}"
                     rates[pair_key] = data[gecko_id][self.config.BASE_CURRENCY.lower()]
             

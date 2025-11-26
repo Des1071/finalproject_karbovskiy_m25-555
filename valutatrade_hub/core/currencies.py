@@ -8,7 +8,9 @@ from .exceptions import CurrencyNotFoundError
 class Currency(ABC):
     def __init__(self, name: str, code: str):
         if not code or len(code) < 2 or len(code) > 5 or not code.isalpha():
-            raise ValueError('Ошибка: Код валюты должен быть 2-5 символов в верхнем регистре')
+            raise ValueError(
+                'Ошибка: Код валюты должен быть 2-5 символов в верхнем регистре'
+                )
         if not name or not name.strip():
             raise ValueError('Ошибка: Название валюты не может быть пустым')
         
@@ -43,8 +45,10 @@ class CryptoCurrency(Currency):
         self._market_cap = market_cap
     
     def get_display_info(self) -> str:
-        mcap_str = f'{self._market_cap:.2e}' if self._market_cap > 1e6 else f'{self._market_cap:,.2f}'
-        return f'[CRYPTO] {self._code} — {self._name} (Algo: {self._algorithm}, MCAP: {mcap_str})'
+        mcap_str = f'{self._market_cap:.2e}' \
+            if self._market_cap > 1e6 else f'{self._market_cap:,.2f}'
+        return f'[CRYPTO] {self._code} — {self._name} \
+    (Algo: {self._algorithm}, MCAP: {mcap_str})'
 
 # Реестр валют
 class CurrencyRegistry:
@@ -70,18 +74,34 @@ def initialize_currencies():
     '''
     Инициализация базового набора валют
     '''
-    CurrencyRegistry.register_currency(FiatCurrency('US Dollar', 'USD', 'United States'))
+    CurrencyRegistry.register_currency(
+        FiatCurrency('US Dollar', 'USD', 'United States')
+        )
     CurrencyRegistry.register_currency(FiatCurrency('Euro', 'EUR', 'Eurozone'))
-    CurrencyRegistry.register_currency(FiatCurrency('British Pound', 'GBP', 'United Kingdom'))
-    CurrencyRegistry.register_currency(FiatCurrency('Russian Ruble', 'RUB', 'Russia'))
-    CurrencyRegistry.register_currency(FiatCurrency('Japanese Yen', 'JPY', 'Japan'))
+    CurrencyRegistry.register_currency(
+        FiatCurrency('British Pound', 'GBP', 'United Kingdom')
+        )
+    CurrencyRegistry.register_currency(
+        FiatCurrency('Russian Ruble', 'RUB', 'Russia'))
+    CurrencyRegistry.register_currency(FiatCurrency('Japanese Yen', 'JPY', 'Japan')
+                                       )
     CurrencyRegistry.register_currency(FiatCurrency('Chinese Yuan', 'CNY', 'China'))
     
-    CurrencyRegistry.register_currency(CryptoCurrency('Bitcoin', 'BTC', 'SHA-256', 1.12e12))
-    CurrencyRegistry.register_currency(CryptoCurrency('Ethereum', 'ETH', 'Ethash', 4.5e11))
-    CurrencyRegistry.register_currency(CryptoCurrency('Solana', 'SOL', 'Proof of History', 6.8e10))
-    CurrencyRegistry.register_currency(CryptoCurrency('Cardano', 'ADA', 'Ouroboros', 2.3e10))
-    CurrencyRegistry.register_currency(CryptoCurrency('Polkadot', 'DOT', 'Nominated Proof-of-Stake', 1.2e10))
+    CurrencyRegistry.register_currency(
+        CryptoCurrency('Bitcoin', 'BTC', 'SHA-256', 1.12e12)
+        )
+    CurrencyRegistry.register_currency(
+        CryptoCurrency('Ethereum', 'ETH', 'Ethash', 4.5e11)
+        )
+    CurrencyRegistry.register_currency(
+        CryptoCurrency('Solana', 'SOL', 'Proof of History', 6.8e10)
+        )
+    CurrencyRegistry.register_currency(
+        CryptoCurrency('Cardano', 'ADA', 'Ouroboros', 2.3e10)
+        )
+    CurrencyRegistry.register_currency(
+        CryptoCurrency('Polkadot', 'DOT', 'Nominated Proof-of-Stake', 1.2e10)
+        )
 
 # Фабричный метод
 def get_currency(code: str) -> Currency:

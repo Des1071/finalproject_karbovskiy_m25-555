@@ -121,7 +121,9 @@ class UserManager:
 
 class PortfolioManager:
     @log_action('BUY', verbose=True)
-    def buy_currency(self, user_id: int, currency_code: str, amount: float, base_currency: str = 'USD') -> Dict[str, Any]:
+    def buy_currency(self, \
+        user_id: int, currency_code: str, amount: float, \
+            base_currency: str = 'USD') -> Dict[str, Any]:
         '''
         Покупка валюты с списанием базовой валюты
         '''
@@ -162,7 +164,9 @@ class PortfolioManager:
         }
 
     @log_action('SELL', verbose=True)
-    def sell_currency(self, user_id: int, currency_code: str, amount: float, base_currency: str = 'USD') -> Dict[str, Any]:
+    def sell_currency(self, user_id: int, \
+        currency_code: str, amount: float, \
+            base_currency: str = 'USD') -> Dict[str, Any]:
         '''
         Продажа валюты с зачислением базовой валюты
         '''
@@ -212,7 +216,8 @@ class PortfolioManager:
         '''
         portfolios_data = db.load_data('portfolios') or []
         
-        portfolio_data = next((p for p in portfolios_data if p['user_id'] == user_id), None)
+        portfolio_data = next((p for p in portfolios_data \
+            if p['user_id'] == user_id), None)
         if not portfolio_data:
             raise ValueError(f'Портфель для пользователя {user_id} не найден')
         

@@ -13,7 +13,8 @@ class ParserStorage:
     '''
     
     def save_exchange_rate(self, rate_data):
-        print(f'Saving rate: {rate_data['from_currency']}_{rate_data['to_currency']} = {rate_data['rate']}')
+        print(f'Saving rate: {rate_data['from_currency']}_{\
+            rate_data['to_currency']} = {rate_data['rate']}')
     
     def save_current_rates(self, rates, source):
         print(f'Saving {len(rates)} current rates from {source}')
@@ -96,7 +97,9 @@ class RatesUpdater:
                 
                 all_rates.update(rates)
                 successful_sources.append(source_name)
-                self.logger.info(f'Successfully fetched {len(rates)} rates from {source_name}')
+                self.logger.info(
+                    f'Successfully fetched {len(rates)} rates from {source_name}'
+                    )
                 
             except ApiRequestError as e:
                 self.logger.error(f'API error from {source_name}: {e}')
@@ -116,7 +119,8 @@ class RatesUpdater:
     def _save_to_files(self, rates: Dict[str, float], sources: list):
         '''
         Сохранение курсов в JSON файлы.
-        Передаём rates (список полученных валют) в виде словаря а source (источники) в виде списка
+        Передаём rates (список полученных валют) в виде словаря 
+        а source (источники) в виде списка
         '''
         try:
             import json
@@ -183,5 +187,3 @@ class RatesUpdater:
                 'total_pairs': 0,
                 'source': 'error'
             }
-            
-            

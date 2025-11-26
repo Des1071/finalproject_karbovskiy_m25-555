@@ -11,13 +11,14 @@ class ValutaTradeError(Exception):
 
 class InsufficientFundsError(ValutaTradeError):
     '''
-    Обработка исключения - не можешь списать денег больше чем у тебя есть (купить/продать)
+    Обработка исключения -не можешь списать денег больше чем у тебя есть(купить/продать)
     '''
     def __init__(self, available: float, required: float, code: str):
         self.available = available
         self.required = required
         self.code = code
-        super().__init__(f'Ошибка: Недостаточно средств: доступно {available} {code}, требуется {required} {code}')
+        super().__init__(f'Ошибка: Недостаточно средств: доступно {available} {code},\
+            требуется {required} {code}')
 
 
 class CurrencyNotFoundError(ValutaTradeError):
@@ -48,7 +49,8 @@ class UserNotFoundError(ValutaTradeError):
 
 class AuthenticationError(ValutaTradeError):
     '''
-    Обрабатывает вход пользователя - проверяет пароль и если пароль неверный, возвращает ошибку
+    Обрабатывает вход пользователя - проверяет пароль и если пароль неверный,\
+        возвращает ошибку
     '''
     def __init__(self):
         super().__init__('Ошибка: Неверный пароль')
@@ -56,7 +58,8 @@ class AuthenticationError(ValutaTradeError):
 
 class UsernameTakenError(ValutaTradeError):
     '''
-    Обрабатывает регистрацию (если пользователь с таким именем уже существует - вернет ошибку)
+    Обрабатывает регистрацию (если пользователь с \
+        таким именем уже существует - вернет ошибку)
     '''
     def __init__(self, username: str):
         super().__init__(f'Ошибка: Имя пользователя "{username}" уже занято')

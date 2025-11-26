@@ -106,7 +106,8 @@ class InteractiveCLI:
             
             print('Обновление завершено!')
             print(f'Получено курсов: {len(rates)}')
-            print(f'Время обновления: {self.rates_updater.get_update_status()['last_refresh']}')
+            print(f'Время обновления: \
+                {self.rates_updater.get_update_status()['last_refresh']}')
             
         except Exception as e:
             print(f'Ошибка: Ошибка при обновлении: {e}')
@@ -189,8 +190,12 @@ class InteractiveCLI:
         print(f'ValutaTrade Hub - {title}')
         print('-' * 50)
         if self.user_manager.current_user:
-            print(f'Пользователь: {self.user_manager.current_user.username}')
-            print(f'Дата регистрации: {self.user_manager.current_user.registration_date}')
+            print(
+                f'Пользователь: {self.user_manager.current_user.username}'
+                )
+            print(
+                f'Дата регистрации: {self.user_manager.current_user.registration_date}'
+                )
         print()
     
     def wait_for_enter(self):
@@ -320,7 +325,8 @@ class InteractiveCLI:
                 balance_str = f'{wallet.balance:.2f}'
                 value_str = f'{value:,.2f}' if value >= 1000 else f'{value:.2f}'
                 
-                print(f'{currency_code:<10} {balance_str:<15} {value_str:<20} {base_currency}')
+                print(f'{currency_code:<10} {balance_str:<15} \
+                    {value_str:<20} {base_currency}')
             
             print('-' * 50)
             print(f'{"ОБЩАЯ СТОИМОСТЬ":<25} {total_value:,.2f} {base_currency}')
@@ -343,7 +349,8 @@ class InteractiveCLI:
         self.print_header('Процедура: Покупка валюты')
         
         try:
-            currency_code = self.get_user_input('Код валюты (например, BTC, EUR): ').upper()
+            currency_code = self.get_user_input('Код валюты \
+                (например, BTC, EUR): ').upper()
             amount = self.get_float_input('Количество для покупки: ')
             
             if currency_code == 'USD':
@@ -399,7 +406,10 @@ class InteractiveCLI:
                     print(f'   Куплено: {amount} {currency_code}')
                     print(f'   Стоимость: {cost:,.2f} USD')
                     print(f'   Новый баланс {currency_code}: {result['new_balance']}')
-                    print(f'   Новый баланс USD: {result['base_currency_new_balance']:,.2f}')
+                    print(
+                        f'   Новый баланс USD:\
+                            {result['base_currency_new_balance']:,.2f}'
+                        )
                     
                 except Exception as e:
                     print(f'\n Ошибка: Ошибка при выполнении операции: {repr(e)}')
@@ -444,7 +454,8 @@ class InteractiveCLI:
             for currency_code, wallet in portfolio.wallets.items():
                 if wallet.balance > 0 and currency_code != 'USD':
                     available_currencies.append(currency_code)
-                    balance_str = f'{wallet.balance:.8f}' if currency_code in ['BTC', 'ETH'] else f'{wallet.balance:.4f}'
+                    balance_str = f'{wallet.balance:.8f}' \
+                        if currency_code in ['BTC', 'ETH'] else f'{wallet.balance:.4f}'
                     print(f'  {currency_code}: {balance_str}')
             
             if not available_currencies:
@@ -456,9 +467,12 @@ class InteractiveCLI:
             currency_code = self.get_user_input('Код валюты для продажи: ').upper()
             
             if currency_code not in available_currencies:
-                print(f'\nОшибка: У вас нет валюты {currency_code} для продажи или валюта недоступна!')
+                print(f'\nОшибка:\
+                    У вас нет валюты {currency_code} \
+                        для продажи или валюта недоступна!=')
                 self.wait_for_enter()
                 return
+            
             
             wallet = portfolio.wallets[currency_code]
             max_amount = wallet.balance
@@ -467,7 +481,8 @@ class InteractiveCLI:
             amount = self.get_float_input('Количество для продажи: ')
             
             if amount > max_amount:
-                print(f'\n Ошибка: Недостаточно средств! Доступно: {max_amount} {currency_code}')
+                print(f'\n Ошибка: Недостаточно средств! \
+                    Доступно: {max_amount} {currency_code}')
                 self.wait_for_enter()
                 return
             
@@ -475,7 +490,8 @@ class InteractiveCLI:
                 rate = self.rate_manager.get_rate(currency_code, 'USD')
                 revenue = amount * rate
                 
-                current_usd_balance = portfolio.wallets['USD'].balance if 'USD' in portfolio.wallets else 0
+                current_usd_balance = portfolio.wallets['USD'].balance \
+                    if 'USD' in portfolio.wallets else 0
                 
                 print('\n Детали продажи:')
                 print(f'   Валюта: {currency_code}')
@@ -483,7 +499,9 @@ class InteractiveCLI:
                 print(f'   Текущий курс: 1 {currency_code} = {rate:.6f} USD')
                 print(f'   Общая выручка: {revenue:,.2f} USD')
                 print(f'   Текущий баланс USD: {current_usd_balance:,.2f}')
-                print(f'   Баланс USD после продажи: {current_usd_balance + revenue:,.2f}')
+                print(
+                    f'   Баланс USD после продажи: {current_usd_balance + revenue:,.2f}'
+                    )
                 
             except Exception as e:
                 print(f'Ошибка: Не удалось получить курс для {currency_code}: {e}')
@@ -505,7 +523,10 @@ class InteractiveCLI:
                     print(f'   Продано: {amount} {currency_code}')
                     print(f'   Выручка: {revenue:,.2f} USD')
                     print(f'   Новый баланс {currency_code}: {result['new_balance']}')
-                    print(f'   Новый баланс USD: {result['base_currency_new_balance']:,.2f}')
+                    print(
+                        f'   Новый баланс USD: \
+                            {result['base_currency_new_balance']:,.2f}'
+                        )
                     
                 except Exception as e:
                     print(f'\n Ошибка: Ошибка при выполнении операции: {repr(e)}')
@@ -650,7 +671,8 @@ class InteractiveCLI:
         print('КУРСЫ ВАЛЮТ')
         print('-'*50)
         if not self.rate_manager.is_rates_data_fresh():
-               print('Предупреждение: Данные о курсах могут быть устаревшими. Рекомендуется обновить курсы.')
+               print('Предупреждение: Данные о курсах могут быть устаревшими.\
+                   Рекомендуется обновить курсы.')
         print(table)
         print(f'\nВсего валют: {len(rates)}')
     
@@ -716,7 +738,8 @@ class InteractiveCLI:
             try:
                 self.show_main_menu()
                 
-                choice = input('Список доступных команд (введите текстовую команду или число 1-12): ').strip()
+                choice = input('Список доступных команд\
+                    (введите текстовую команду или число 1-12): ').strip()
                 
                 command = self.get_command(choice)
                 
@@ -724,7 +747,8 @@ class InteractiveCLI:
                     _, handler = self.menu_options[command]
                     handler()
                 else:
-                    print(f'\n Ошибка: Неверный выбор: "{choice}"! Пожалуйста, выберите от 1 до 12 или используйте команды из меню.')
+                    print(f'\n Ошибка: Неверный выбор: "{choice}"! Пожалуйста, выберите\
+                        от 1 до 12 или используйте команды из меню.')
                     self.wait_for_enter()
             
             except KeyboardInterrupt:

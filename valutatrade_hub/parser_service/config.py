@@ -3,12 +3,13 @@ import os
 from dataclasses import dataclass
 from typing import Dict, Tuple
 
+
 @dataclass
 class ParserConfig:
     '''
     Конфигурация для сервиса парсинга
     '''
-    
+    #c3c50d30c644ebe263a8fe53
     EXCHANGERATE_API_KEY: str = os.getenv('EXCHANGERATE_API_KEY') 
  
  
@@ -64,7 +65,7 @@ class ParserConfig:
         Создание конфигурации из переменных окружения
         '''
         return cls(
-            EXCHANGERATE_API_KEY=os.getenv('EXCHANGERATE_API_KEY'), ##c3c50d30c644ebe263a8fe53
+            EXCHANGERATE_API_KEY=os.getenv('EXCHANGERATE_API_KEY'), 
             REQUEST_TIMEOUT=int(os.getenv('PARSER_REQUEST_TIMEOUT', '30')),
             UPDATE_INTERVAL_MINUTES=int(os.getenv('PARSER_UPDATE_INTERVAL', '5')),
             RATES_TTL_SECONDS=int(os.getenv('RATES_TTL_SECONDS', '300'))
@@ -83,7 +84,8 @@ class ParserConfig:
         # Проверяем коды валют
         if not all(currency.isalpha() and currency.isupper() 
                   for currency in self.FIAT_CURRENCIES + self.CRYPTO_CURRENCIES):
-            raise ValueError('Ошибка: Коды валют должны быть в верхнем регистре и содержать только буквы')
+            raise ValueError('Ошибка: Коды валют должны быть \
+                в верхнем регистре и содержать только буквы')
         
         # Создаем директорию для данных
         data_dir = os.path.dirname(self.RATES_FILE_PATH)
@@ -92,7 +94,9 @@ class ParserConfig:
                 os.makedirs(data_dir, exist_ok=True)
                 print(f'Создана директория: {data_dir}')
             except OSError as e:
-                raise ValueError(f'Ошибка: Не удалось создать директорию {data_dir}: {e}')
+                raise ValueError(
+                    f'Ошибка: Не удалось создать директорию {data_dir}: {e}'
+                    )
         
         return True
     
@@ -115,4 +119,6 @@ class ParserConfig:
         '''
         Получение URL для запроса к ExchangeRate-API (требует ключ)
         '''
-        return f'{self.EXCHANGERATE_API_URL}/{self.EXCHANGERATE_API_KEY}/latest/{self.BASE_CURRENCY}'
+        return f'{self.EXCHANGERATE_API_URL}/{self.EXCHANGERATE_API_KEY}/latest/{
+            self.BASE_CURRENCY
+            }'

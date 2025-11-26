@@ -5,5 +5,12 @@
     "hashed_password": "be90e0dc0967edaeece20f6f73079a11501cec67f6ebb62c0b219411a51aa238",
     "salt": "f18aed0ffe3cf2aa",
     "registration_date": "2025-11-17T21:49:59.379276"
+  },
+  {
+    "user_id": 2,
+    "username": "qwe",
+    "hashed_password": "adb70487e69e268fe32094fea534066bfea92e461c95dcbdb15896ceacd165b8",
+    "salt": "08e078188a42ad29",
+    "registration_date": "2025-11-26T21:38:26.481917"
   }
 ]
